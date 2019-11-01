@@ -1,18 +1,15 @@
+// © 2019 Joseph Cameron - All Rights Reserved
+
 #include <jfc/catch.hpp>
 #include <jfc/types.h>
 
 #include <jfc/shared_handle.h>
 
-TEST_CASE( "jfc::thread_group test", "[jfc::thread_group]" )
+TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
 {
-    SECTION("default constructor creates group of expected size")
+    SECTION("")
     {
-        /*jfc::thread_group group;
-
-        const auto expected_group_size = std::thread::hardware_concurrency() 
-            ? std::thread::hardware_concurrency() - 1 
-            : 0;*/
-
+        //
         REQUIRE(true);
     }
 }
