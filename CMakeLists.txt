@@ -24,6 +24,7 @@ jfc_project(library
 
     SOURCE_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/src/shared_handle.cpp
+        #${CMAKE_CURRENT_SOURCE_DIR}/src/weak_handle.cpp
 )
 
 #if (JFC_BUILD_DEMO)

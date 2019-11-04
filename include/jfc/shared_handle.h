@@ -8,6 +8,8 @@
 
 namespace jfc
 {
+    template<typename T> class weak_handle;
+
     /// \brief provides automatic based mechanism for cleanup of "handle types"
     /// a handle is responsible for some sort of manual state managemnet at end of life. e.g: OpenGL/AL buffer handles, LibClang nodes
     /// Deleter will only be called once: when final the copy of the smart handle goes out of scope.
@@ -16,8 +18,13 @@ namespace jfc
     template<class handle_type_param>
     class shared_handle final
     {
+        /// \brief weaks must have full access to data in order to construct
+        friend weak_handle<handle_type_param>;
     public:
+        /// \brief alias for handle type
         using handle_type = handle_type_param;
+
+        /// \brief alias for deleter functor
         using deleter_type = std::function<void(const handle_type)>;
 
     private: 
@@ -94,4 +101,3 @@ namespace jfc
 }
 
 #endif
-
