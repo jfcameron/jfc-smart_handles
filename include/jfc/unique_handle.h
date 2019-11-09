@@ -3,18 +3,22 @@
 #ifndef JFC_UNIQUE_HANDLE_H
 #define JFC_UNIQUE_HANDLE_H
 
-#include <jfc/shared_handle.h>
-
 #include <atomic>
+#include <functional>
 #include <memory>
 
 namespace jfc
 {
+    template<typename T> class shared_handle;
+
     /// \brief move friendly, single owner smart handle. When the owner falls out of scope,
     /// the handle is cleaned up via the deleter call in the dtor.
     template<class handle_type_param>
     class unique_handle final
     {
+        /// \brief shared must have full access to data in order to move a unique to a shared
+        friend shared_handle<handle_type_param>;
+
     public:
         /// \brief alias for handle type
         using handle_type = handle_type_param;

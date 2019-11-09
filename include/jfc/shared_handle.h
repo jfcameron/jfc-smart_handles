@@ -3,6 +3,8 @@
 #ifndef JFC_SHARED_HANDLE_H
 #define JFC_SHARED_HANDLE_H
 
+#include <jfc/unique_handle.h>
+
 #include <functional>
 #include <memory>
 #include <iostream>
@@ -90,6 +92,19 @@ namespace jfc
         shared_handle &operator=(shared_handle<handle_type> &&b) const
         {
             return std::move(b);
+        }
+
+        /// \brief move unique_handle to shared_handle semantics
+        shared_handle(unique_handle<handle_type> &&unique)
+        : m_Handle(std::move(unique.m_Handle))
+        , m_pDeleter(std::make_shared<deleter_type>(unique.m_Deleter))
+        {
+            unique.m_IsOwner = false;
+        }
+        /// \brief move unique_handle to shared_handle semantics
+        shared_handle &operator=(unique_handle<handle_type> &&unique) const
+        {
+            return std::move(unique);    
         }
 
         /// \brief takes a handle and a functor which contains cleanup logic for the handle.

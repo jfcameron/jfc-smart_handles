@@ -4,6 +4,7 @@
 #include <jfc/types.h>
 
 #include <jfc/shared_handle.h>
+#include <jfc/unique_handle.h>
 
 #include <cstddef>
 
@@ -60,7 +61,7 @@ TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
         REQUIRE(!deleterCalled);
     }
 
-    SECTION("move semantics")
+    SECTION("shared move semantics")
     {
         REQUIRE(!deleterCalled);
 
@@ -71,6 +72,17 @@ TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
         }
 
         REQUIRE(deleterCalled);
+    }
+
+    SECTION("from unique move semantics move value and ownership (deletor is not called when moved unique falls out of scope")
+    {
+        int deleter_call_count(0);
+
+        shared_handle<int> share = std::move(unique_handle<int>(INITIALIZED, [&deleter_call_count](const int){deleter_call_count++;}));
+
+        REQUIRE(share.get() == INITIALIZED);
+
+        REQUIRE(deleter_call_count == 0);
     }
 }
 
