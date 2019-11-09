@@ -10,6 +10,8 @@
 
 namespace jfc
 {
+    /// \brief non-owning handle to a resource. The resource may fall out of scope while this is in scope.
+    /// to access the resource, a shared_handle must be created via lock method.
     template<class handle_type_param>
     class weak_handle final
     {
@@ -29,32 +31,21 @@ namespace jfc
 
     public:
         /// \brief attempts to create a shared_handle instance, if the handle has not been deleted
-        std::optional<shared_handle<handle_type>> lock() //const
+        std::optional<shared_handle<handle_type>> lock() const
         {
             if (auto pDeleter = m_pDeleter.lock()) 
             {
                 auto handle(m_Handle);
 
-                return shared_handle<handle_type>(std::move(handle), std::move(*pDeleter));
+                return shared_handle<handle_type>(handle, pDeleter);
             }
 
             return {};
         }
-       
-        /// \brief equality operators
-        bool operator==(const weak_handle<handle_type> &b) const
+
+        bool expired()
         {
-            return 
-                m_Handle   == b.m_Handle && 
-                m_pDeleter == b.m_pDeleter;
-        }
-        
-        /// \brief equality operators
-        bool operator!=(const weak_handle<handle_type> &b) const
-        {
-            return 
-                m_Handle   != b.m_Handle || 
-                m_pDeleter != b.m_pDeleter;
+            return m_pDeleter.expired();
         }
 
         /// \brief copy semantics
@@ -76,16 +67,17 @@ namespace jfc
         /// \brief move semantics
         weak_handle &operator=(weak_handle<handle_type> &&b) const
         {
-            return std::move(b);
+            return weak_handle(std::move(b));
         }
 
-        //operator= for shared
-
-        /// \brief create a weak handle out of a shared handle
-        weak_handle(const shared_handle_type handle)
+        /// \brief weak handle from shared handle copy semantics
+        weak_handle(const shared_handle_type &handle)
         : m_Handle(handle.m_Handle)
         , m_pDeleter(handle.m_pDeleter)
         {}
+        /// \brief weak handle from shared handle copy semantics
+        //operator= for shared
+        weak_handle &operator=(const shared_handle_type &handle) {return weak_handle(handle);}
 
         ~weak_handle() = default;
     };

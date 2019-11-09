@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <memory>
+#include <iostream>
 
 namespace jfc
 {
@@ -33,6 +34,12 @@ namespace jfc
 
         /// \brief a pointer to the deletor shared across moved/copied instances. Called when the final co-owning instance of the handle falls out of scope, cleaning up the resource.
         std::shared_ptr<deleter_type> m_pDeleter;
+
+        /// \brief used when promoting a weak to a shared
+        shared_handle(decltype(m_Handle) aHandle, decltype(m_pDeleter) aDeleter)
+        : m_Handle(aHandle)
+        , m_pDeleter(aDeleter)
+        {}
 
     public:
         /// \brief gets a copy of the handle's value
