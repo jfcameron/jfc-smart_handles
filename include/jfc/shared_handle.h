@@ -7,7 +7,6 @@
 
 #include <functional>
 #include <memory>
-#include <iostream>
 
 namespace jfc
 {
@@ -115,9 +114,11 @@ namespace jfc
         , m_pDeleter(std::make_shared<shared_handle<handle_type>::deleter_type>(aDeleter))
         {}
 
+        /// \brief if this is the final owner, invoke the deleter (so long as it exists)
+        /// <= used since non-zero values are approximate in a concurrent context
         ~shared_handle()
         {
-            if (m_pDeleter.use_count() == 1) (*m_pDeleter)(m_Handle);
+            if (m_pDeleter.use_count() <= 1 && m_pDeleter) (*m_pDeleter)(m_Handle);
         }
     };
 }

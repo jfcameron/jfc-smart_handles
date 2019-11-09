@@ -43,14 +43,14 @@ namespace jfc
             return {};
         }
 
-        bool expired()
+        bool expired() const
         {
             return m_pDeleter.expired();
         }
 
         /// \brief copy semantics
         weak_handle(const weak_handle<handle_type> &b)
-        : m_Handle(b.get())
+        : m_Handle(b.m_Handle)
         , m_pDeleter(b.m_pDeleter)
         {}
         /// \brief copy semantics

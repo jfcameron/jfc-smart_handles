@@ -3,7 +3,6 @@
 #ifndef JFC_UNIQUE_HANDLE_H
 #define JFC_UNIQUE_HANDLE_H
 
-#include <atomic>
 #include <functional>
 #include <memory>
 
