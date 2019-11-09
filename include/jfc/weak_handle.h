@@ -35,7 +35,7 @@ namespace jfc
             {
                 auto handle(m_Handle);
 
-                return shared_handle<handle_type>(std::move(handle), std::move(pDeleter));
+                return shared_handle<handle_type>(std::move(handle), std::move(*pDeleter));
             }
 
             return {};
