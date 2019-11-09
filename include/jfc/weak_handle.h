@@ -76,7 +76,6 @@ namespace jfc
         , m_pDeleter(handle.m_pDeleter)
         {}
         /// \brief weak handle from shared handle copy semantics
-        //operator= for shared
         weak_handle &operator=(const shared_handle_type &handle) {return weak_handle(handle);}
 
         ~weak_handle() = default;
