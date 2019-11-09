@@ -1,7 +1,7 @@
 // © 2019 Joseph Cameron - All Rights Reserved
 
-#ifndef GDK_WEAK_HANDLE_H
-#define GDK_WEAK_HANDLE_H
+#ifndef JFC_WEAK_HANDLE_H
+#define JFC_WEAK_HANDLE_H
 
 #include <jfc/shared_handle.h>
 

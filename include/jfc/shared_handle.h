@@ -1,7 +1,7 @@
 // © 2019 Joseph Cameron - All Rights Reserved
 
-#ifndef GDK_SHARED_HANDLE_H
-#define GDK_SHARED_HANDLE_H
+#ifndef JFC_SHARED_HANDLE_H
+#define JFC_SHARED_HANDLE_H
 
 #include <functional>
 #include <memory>
