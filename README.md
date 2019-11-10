@@ -14,3 +14,6 @@ Shared handle models the many owners case, the deletor is invoked when the final
 
 ### weak_handle
 Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.
+
+Documentation can be generated with doxygen.
+Unit tests written with catch2 are available under test/
