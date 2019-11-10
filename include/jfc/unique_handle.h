@@ -56,6 +56,11 @@ namespace jfc
             return std::move(b);
         }
 
+        /// \brief explicitly disallowing copy semantics
+        unique_handle(const unique_handle<handle_type> &) = delete;
+        /// \brief explicitly disallowing copy semantics
+        unique_handle &operator=(const unique_handle<handle_type> &) = delete;
+
         /// \brief standard constructor
         unique_handle(handle_type aValue, deleter_type aDeleter)
         : m_Handle(aValue)
