@@ -19,7 +19,7 @@ matrix:
           ctest --extra-verbose
       after_success:
         - |
-          cd ..;touch build/${CURRENT_COMMIT_HASH};zip -r ~/${TRAVIS_OS_NAME}.zip build -x build/.keep
+          cd ..;ls -R;touch build/${CURRENT_COMMIT_HASH};zip -r ~/${TRAVIS_OS_NAME}.zip build -x build/.keep
           git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           git fetch --all
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
@@ -45,7 +45,7 @@ matrix:
           ctest --extra-verbose
       after_success:
         - |
-          cd ..;touch build/${CURRENT_COMMIT_HASH};zip -r ~/${TRAVIS_OS_NAME}.zip build -x build/.keep
+          cd ..;ls -R;touch build/${CURRENT_COMMIT_HASH};zip -r ~/${TRAVIS_OS_NAME}.zip build -x build/.keep
           git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           git fetch --all
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard

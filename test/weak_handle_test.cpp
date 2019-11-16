@@ -29,7 +29,7 @@ TEST_CASE( "jfc::weak_handle test", "[jfc::weak_handle]" )
     {
         auto mkshared = []()
         {
-            return shared_handle<int>(1, [&](int a){});
+            return shared_handle<int>(1, [&](int){});
         };
 
         weak_handle<int> b(mkshared());
