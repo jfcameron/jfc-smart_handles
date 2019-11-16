@@ -42,6 +42,14 @@ namespace jfc
             return m_Handle;
         }
 
+        /// \brief equality semantics
+        bool operator==(const unique_handle<handle_type> &b) const
+        {
+            return m_Handle == m_Handle;
+        }
+        /// \brief equality semantics
+        bool operator!=(const unique_handle<handle_type> &b) const {return !(*this = b);}
+
         /// \brief move semantics
         unique_handle(unique_handle<handle_type> &&b)
         : m_Handle(std::move(b.m_Handle))
@@ -51,10 +59,7 @@ namespace jfc
             b.m_IsOwner = false;
         }
         /// \brief move semantics
-        unique_handle &operator=(unique_handle<handle_type> &&b) const
-        {
-            return std::move(b);
-        }
+        unique_handle &operator=(unique_handle<handle_type> &&b) const {return std::move(b);}
 
         /// \brief explicitly disallowing copy semantics
         unique_handle(const unique_handle<handle_type> &) = delete;
