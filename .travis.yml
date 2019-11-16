@@ -35,18 +35,6 @@ matrix:
           make
           ctest --extra-verbose
 
-    - os: linux
-        compiler: gcc
-        addons:
-        apt:
-        packages:
-          - doxygen
-        env: Generate documentation
-        script:
-          - |
-            cd workspace
-            cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
-
 before_script: 
   - |
     CURRENT_COMMIT_HASH="$(git rev-parse HEAD)"
