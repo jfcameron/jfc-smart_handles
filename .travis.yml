@@ -36,7 +36,7 @@ matrix:
           ctest --extra-verbose
 
     - os: linux
-      if: branch = master
+    #  if: branch = master
       compiler: gcc
       addons:
         apt:
@@ -47,7 +47,12 @@ matrix:
         - |
           cd workspace
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
-          ls -R
+          mv docs ~
+          cd ..
+          git clean -fxd
+          git checkout gh-pages
+          mv ~/docs .
+          git add docs;git commit -m "updating online docs";git push
 
 before_script: 
   - |
