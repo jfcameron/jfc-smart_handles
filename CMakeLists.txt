@@ -27,3 +27,7 @@ if (JFC_BUILD_TESTS)
     add_subdirectory(test)
 endif()
 
+if (JFC_BUILD_DOCS)
+    add_subdirectory(docs)
+endif()
+
