@@ -26,6 +26,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - cmake
+            - git
       env: Build, Test & Deploy
       script:
         - |
