@@ -19,23 +19,11 @@ jfc_project(library
     PUBLIC_INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_SOURCE_DIR}/include/
 
-    #PRIVATE_INCLUDE_DIRECTORIES
-    #${CMAKE_CURRENT_SOURCE_DIR}/src/include
-
     SOURCE_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/src/shared_handle.cpp
-        #${CMAKE_CURRENT_SOURCE_DIR}/src/weak_handle.cpp
 )
-
-#if (JFC_BUILD_DEMO)
-#    add_subdirectory(demo)
-#endif()
 
 if (JFC_BUILD_TESTS)
     add_subdirectory(test)
 endif()
-
-#[[if (JFC_BUILD_DOCS)
-    add_subdirectory(docs)
-endif()]]
 
