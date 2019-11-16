@@ -15,7 +15,7 @@ using glfloat = float;
 
 static constexpr glint INITIALIZED(1);
 
-glint glGenBuffer()
+static glint glGenBuffer()
 {
     return INITIALIZED;
 }
