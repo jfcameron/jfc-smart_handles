@@ -38,13 +38,13 @@ matrix:
       env: Build, Test & Deploy
       script:
         - |
+          gcc -v; g++ -v; cmake --version
           cd workspace
           cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native"
           make
           ctest --extra-verbose
       after_success:
         - |
-          gcc -v && g++ -v && cmake --version
           cd ..;touch build/${CURRENT_COMMIT_HASH};zip -r ~/${TRAVIS_OS_NAME}.zip build -x build/.keep
           git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           git fetch --all
