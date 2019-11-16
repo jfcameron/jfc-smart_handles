@@ -35,7 +35,6 @@ matrix:
           make
           ctest --extra-verbose
 
-    if: branch = master
     - os: linux
       compiler: gcc
       addons:
