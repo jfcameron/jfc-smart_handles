@@ -46,12 +46,6 @@ matrix:
           - |
             cd workspace
             cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
-            mv docs ~
-            cd ..
-            git clean -fxd
-            git checkout gh-pages
-            mv ~/docs .
-            git add docs;git commit -m "updating docs";git push
 
 before_script: 
   - |
