@@ -44,16 +44,14 @@ matrix:
         env: Generate documentation
         script:
           - |
-            if [[ "$(git branch | grep \* | cut -d ' ' -f2)" = "master" ]]; then
-                cd workspace
-                cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
-                mv docs ~
-                cd ..
-                git clean -fxd
-                git checkout gh-pages
-                mv ~/docs .
-                git add docs;git commit -m "updating docs";git push
-            fi;
+            cd workspace
+            cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
+            mv docs ~
+            cd ..
+            git clean -fxd
+            git checkout gh-pages
+            mv ~/docs .
+            git add docs;git commit -m "updating docs";git push
 
 before_script: 
   - |
