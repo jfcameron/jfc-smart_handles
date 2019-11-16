@@ -54,9 +54,9 @@ matrix:
           git remote get-url origin
           git branch -r
           git branch -vv
-          g8t checkout -b gh-pages origin/gh-pages
+          git checkout -b gh-pages origin/gh-pages
           git clean -fxd
-          ls -R
+          ls
           #git fetch --all
           #git checkout gh-pages
           #git clean -fxd
