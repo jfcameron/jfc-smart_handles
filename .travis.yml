@@ -8,6 +8,7 @@ language: cpp
 matrix:
   include:
     - os: osx
+      osx_image: xcode11.2
       compiler: clang
       env: Build, Test & Deploy
       script:
