@@ -12,7 +12,7 @@ using namespace jfc;
 
 TEST_CASE( "jfc::weak_handle test", "[jfc::weak_handle]" )
 {
-    shared_handle<int> shared(1, [&](int a){});
+    shared_handle<int> shared(1, [&](int){});
 
     weak_handle<int> weak(shared);
 
