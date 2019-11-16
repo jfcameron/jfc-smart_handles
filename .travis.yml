@@ -35,6 +35,7 @@ matrix:
           make
           ctest --extra-verbose
 
+    if: branch = master
     - os: linux
       compiler: gcc
       addons:
@@ -44,6 +45,7 @@ matrix:
       env: Generate documentation
       script:
         - |
+          cd workspace
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
           ls -R
 
