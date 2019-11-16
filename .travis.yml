@@ -36,6 +36,7 @@ matrix:
           ctest --extra-verbose
 
     - os: linux
+      if: branch = master
       compiler: gcc
       addons:
         apt:
