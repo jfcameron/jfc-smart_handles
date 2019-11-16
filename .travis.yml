@@ -49,8 +49,9 @@ matrix:
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
           mv docs ~
           cd ..
-          git clean -fxd
+          git fetch --all
           git checkout gh-pages
+          git clean -fxd
           mv ~/docs .
           git add docs;git commit -m "updating online docs";git push
 
