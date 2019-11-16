@@ -51,6 +51,7 @@ matrix:
           mv docs ~
           cd ~
           echo "Echo: ${CURRENT_REMOTE_URL}"
+          echo "Echo2: $(git remote get-url origin)"
           git clone --branch="gh-pages ${CURRENT_REMOTE_URL}"
           git branch -vv
 
