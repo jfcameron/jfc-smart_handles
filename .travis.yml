@@ -13,7 +13,7 @@ matrix:
       script:
         - |
           cd workspace
-          cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Ofast -flto -funroll-loops -m64 -march=native -std=c++17"
+          cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Ofast -flto -funroll-loops -m64 -march=native -std=c++17 -stdlib=libc++"
           make
           ctest --extra-verbose
       after_success:
