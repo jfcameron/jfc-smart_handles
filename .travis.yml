@@ -9,6 +9,7 @@ matrix:
   include:
     # Build scripts
     - os: linux
+      name: build linux gcc
       compiler: gcc
       addons:
         apt:
@@ -25,6 +26,7 @@ matrix:
           ctest --extra-verbose
 
     - os: osx
+      name: build macos clang
       osx_image: xcode11.2
       compiler: clang
       script:
@@ -35,6 +37,7 @@ matrix:
           ctest --extra-verbose
 
     - os: windows
+      name: build windows msvc
       compiler: MSVC
       script: 
         - |
@@ -43,6 +46,7 @@ matrix:
           cmake --build .
 
     - os: windows
+      name: build windows mingw
       compiler: mingw64
       install: choco install mingw
       script: 
@@ -53,6 +57,7 @@ matrix:
 
     # Documentation 
     - os: linux
+      name: generate doxygen, upload to gh-pages
       if: branch = master
       compiler: gcc
       addons:
@@ -75,6 +80,7 @@ matrix:
     
     # Coverage
     - os: linux
+      name: generate coverage, upload to coveralls
       if: branch = master
       compiler: gcc
       before_install: pip install --user cpp-coveralls
