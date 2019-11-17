@@ -55,9 +55,11 @@ matrix:
           #echo "Echo2: $(git remote get-url origin)"
           #echo $CURRENT_REMOTE_URL
           echo "$(git remote get-url origin)"
-          BLAR="$(git remote get-url origin)"
-          echo "blar: $BLAR"
-          #git clone --branch="gh-pages ${CURRENT_REMOTE_URL}"
+          ORIGIN_URL="$(git remote get-url origin)"
+          echo "blar: $ORIGIN_URL"
+          git checkout gh-pages
+          #cd ~
+          #git clone --branch="gh-pages $ORIGIN_URL"
           #git branch -vv
           #git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           #git fetch --all 
