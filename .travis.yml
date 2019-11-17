@@ -57,6 +57,23 @@ matrix:
           git add --all
           git commit -m "updating docs"
           git push
+          
+    - os: linux
+      compiler: gcc
+      env: Code Coverage
+      before_install: pip install --user cpp-coveralls
+      script:
+        - |
+          cd workspace
+          cmake .. -DCMAKE_CXX_FLAGS="-g -O0 -Wall -fprofile-arcs -ftest-coverage"
+          make
+          make test
+          after_success:
+          - |
+            cd ..
+            coveralls --exclude tests
+
+
 
 before_script: 
   - |
