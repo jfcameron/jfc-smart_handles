@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jfc-smart_handles
-   &#160;<span id="projectnumber">9ea068722266b875eba5f4c7740cff15d9a67deb</span>
+   &#160;<span id="projectnumber">a6446888657f9d92d69df069e4f3e539c3867522</span>
    </div>
   </td>
  </tr>
@@ -64,8 +64,7 @@ $(function() {
 <div class="title">jfc-smart_handles Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/jfcameron/jfc-smart_handles"></a></p>
-<h2>jfc-smart_handles</h2>
+<div class="textblock"><p><a href="https://travis-ci.org/jfcameron/jfc-smart_handles"></a> <a href="https://coveralls.io/github/jfcameron/jfc-smart_handles?branch=master"></a> <a href="https://jfcameron.github.io/jfc-smart_handles/">![Documentation]</a> </p><h2>jfc-smart_handles</h2>
 <p>scoped wrappers for handle types found in OpenGL, OpenAL, LibClang. Associates a handle with a deleter, to be called when the wrapper falls out of scope.</p>
 <p>The smart_handles define move semantics, copy semantics and end of life behavior, simplifying writing objects around e.g vertex buffer handles, audio buffer handles.</p>
 <p>The types, their interface and interations are modeled after the stl smart pointers.</p>
@@ -76,7 +75,7 @@ $(function() {
 <h3>weak_handle</h3>
 <p>Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.</p>
 <p>Documentation can be generated with doxygen. Unit tests written with catch2 are available under test/</p>
-<p>CI info here: <a href="https://travis-ci.org/jfcameron/jfc-smart_handles">https://travis-ci.org/jfcameron/jfc-smart_handles</a> Online documentations here: <a href="https://jfcameron.github.io/jfc-smart_handles/">https://jfcameron.github.io/jfc-smart_handles/</a> </p>
+<p>Online documentations here: <a href="https://jfcameron.github.io/jfc-smart_handles/">https://jfcameron.github.io/jfc-smart_handles/</a> </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
