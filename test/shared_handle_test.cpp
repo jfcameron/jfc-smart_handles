@@ -10,26 +10,26 @@
 
 using namespace jfc;
 
-using glint = int;
-using glfloat = float;
+using GLint = int;
+using GLfloat = float;
 
-static constexpr glint INITIALIZED(1);
+static constexpr GLint INITIALIZED(1);
 
-glint glGenBuffer()
+static GLint glGenBuffer()
 {
     return INITIALIZED;
 }
 
-TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
+TEST_CASE("jfc::shared_handle", "[jfc::shared_handle]")
 {
     bool deleterCalled(false);
 
-    auto glDeleteBuffer = [&](glint)
+    auto glDeleteBuffer = [&](GLint)
     {
         deleterCalled = true;    
     };
 
-    shared_handle<glint> shared(glGenBuffer(), [&](glint a)
+    shared_handle<GLint> shared(glGenBuffer(), [&](GLint a)
     {
         glDeleteBuffer(a);
     });
@@ -51,7 +51,7 @@ TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
 
             REQUIRE(two == three);
 
-            const decltype(two) four(glGenBuffer(), [&](glint){});
+            const decltype(two) four(glGenBuffer(), [&](GLint){});
 
             REQUIRE(four != three);
 
@@ -78,7 +78,7 @@ TEST_CASE( "jfc::shared_handle test", "[jfc::shared_handle]" )
     {
         int deleter_call_count(0);
 
-        shared_handle<int> share = std::move(unique_handle<int>(INITIALIZED, [&deleter_call_count](const int){deleter_call_count++;}));
+        shared_handle<int> share = unique_handle<int>(INITIALIZED, [&deleter_call_count](const int){deleter_call_count++;});
 
         REQUIRE(share.get() == INITIALIZED);
 

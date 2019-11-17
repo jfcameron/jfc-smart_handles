@@ -17,3 +17,6 @@ Weak handle is similar to Shared, except it does not contribute to the use_count
 
 Documentation can be generated with doxygen.
 Unit tests written with catch2 are available under test/
+
+CI info here: https://travis-ci.org/jfcameron/jfc-smart_handles
+Online documentations here: https://jfcameron.github.io/jfc-smart_handles/

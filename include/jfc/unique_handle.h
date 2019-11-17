@@ -45,7 +45,7 @@ namespace jfc
         /// \brief equality semantics
         bool operator==(const unique_handle<handle_type> &b) const
         {
-            return m_Handle == m_Handle;
+            return m_Handle == b.m_Handle;
         }
         /// \brief equality semantics
         bool operator!=(const unique_handle<handle_type> &b) const {return !(*this = b);}
