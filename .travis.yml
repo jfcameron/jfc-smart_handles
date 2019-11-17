@@ -37,7 +37,7 @@ matrix:
           ctest --extra-verbose
 
     - os: windows
-      compiler: msvc
+      compiler: MSVC
       script: 
         - |
           cd workspace
