@@ -17,7 +17,6 @@ matrix:
           packages:
             - cmake
             - git
-      env: Build, Test
       script:
         - |
           cd workspace
@@ -28,7 +27,6 @@ matrix:
     - os: osx
       osx_image: xcode11.2
       compiler: clang
-      env: Build, Test
       script:
         - |
           cd workspace
@@ -44,7 +42,16 @@ matrix:
           cmake .. -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS=" /W4 /EHsc /WX /std:c++17 /permissive-"
           cmake --build .
 
-    # Documentation & coverage
+    - os: windows
+      compiler: mingw64
+      install: choco install mingw
+      script: 
+        - |
+          cd workspace
+          cmake .. -G "MinGW Makefiles" -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" -DCMAKE_SH="CMAKE_SH-NOTFOUND"
+          cmake --build .
+
+    # Documentation 
     - os: linux
       if: branch = master
       compiler: gcc
@@ -52,7 +59,6 @@ matrix:
         apt:
           packages:
             - doxygen
-      env: Generate documentation
       script:
         - |
           cd workspace
@@ -66,11 +72,11 @@ matrix:
           git add --all
           git commit -m "updating docs"
           git push
-          
+    
+    # Coverage
     - os: linux
       if: branch = master
       compiler: gcc
-      env: Code Coverage
       before_install: pip install --user cpp-coveralls
       script:
         - |
