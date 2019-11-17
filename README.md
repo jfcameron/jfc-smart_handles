@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/jfcameron/jfc-smart_handles.svg?branch=master)](https://travis-ci.org/jfcameron/jfc-smart_handles)
-
+[![Coverage Status](https://coveralls.io/repos/github/jfcameron/jfc-smart_handles/badge.svg?branch=master)](https://coveralls.io/github/jfcameron/jfc-smart_handles?branch=master)
+[![Documentation]](https://jfcameron.github.io/jfc-smart_handles/)
 ## jfc-smart_handles
 
 scoped wrappers for handle types found in OpenGL, OpenAL, LibClang. Associates a handle with a deleter, to be called when the wrapper falls out of scope.
@@ -20,5 +21,4 @@ Weak handle is similar to Shared, except it does not contribute to the use_count
 Documentation can be generated with doxygen.
 Unit tests written with catch2 are available under test/
 
-CI info here: https://travis-ci.org/jfcameron/jfc-smart_handles
 Online documentations here: https://jfcameron.github.io/jfc-smart_handles/
