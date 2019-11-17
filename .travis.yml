@@ -50,8 +50,10 @@ matrix:
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
           mv docs ~
           cd ~
+          CURRENT_REMOTE_URL="$(git remote get-url origin)"
           echo "Echo: ${CURRENT_REMOTE_URL}"
           echo "Echo2: $(git remote get-url origin)"
+          echo $CURRENT_REMOTE_URL
           git clone --branch="gh-pages ${CURRENT_REMOTE_URL}"
           git branch -vv
 
