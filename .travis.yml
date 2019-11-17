@@ -71,7 +71,7 @@ matrix:
           after_success:
           - |
             #cd ..
-            coveralls --exclude tests
+            coveralls --exclude cmake workspace
 
 
 
