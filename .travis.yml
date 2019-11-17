@@ -7,17 +7,7 @@ language: cpp
 
 matrix:
   include:
-    - os: osx
-      osx_image: xcode11.2
-      compiler: clang
-      env: Build, Test
-      script:
-        - |
-          cd workspace
-          cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Wno-padded -Ofast -flto -funroll-loops -m64 -march=native -std=c++17 -stdlib=libc++"
-          make
-          ctest --extra-verbose
-
+    # Build scripts
     - os: linux
       compiler: gcc
       addons:
@@ -35,6 +25,25 @@ matrix:
           make
           ctest --extra-verbose
 
+    - os: osx
+      osx_image: xcode11.2
+      compiler: clang
+      env: Build, Test
+      script:
+        - |
+          cd workspace
+          cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Wno-padded -Ofast -flto -funroll-loops -m64 -march=native -std=c++17 -stdlib=libc++"
+          make
+          ctest --extra-verbose
+
+    - os: windows
+      script: 
+        - |
+          cd workspace
+          cmake .. -DJFC_BUILD_DOCS=OFF
+          cmake --build .
+
+    # Documentation & coverage
     - os: linux
       if: branch = master
       compiler: gcc
@@ -71,8 +80,6 @@ matrix:
           after_success:
           - |
             coveralls --exclude test --exclude workspace/CMakeFiles --exclude cmake --exclude src --gcov-options '\-lp'
-
-
 
 before_script: 
   - |
