@@ -63,7 +63,7 @@ matrix:
           git config --global user.name "travis-ci"
           #BLAR="https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           URL=git config --get remote.origin.url | sed -e "s/^https:\/\///"
-          echo "url: ${URL}
+          echo "url: ${URL}"
           git clone --quiet --branch=gh-pages $BLAR gh-pages > /dev/null
           #git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/ReadyTalk/swt-bling gh-pages > /dev/null
           cd gh-pages
