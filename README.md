@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/jfcameron/jfc-smart_handles.svg?branch=master)](https://travis-ci.org/jfcameron/jfc-smart_handles)
 [![Coverage Status](https://coveralls.io/repos/github/jfcameron/jfc-smart_handles/badge.svg?branch=master)](https://coveralls.io/github/jfcameron/jfc-smart_handles?branch=master)
-[![Documentation]()](https://jfcameron.github.io/jfc-smart_handles/)
+![](https://img.shields.io/badge/Doxygen-lightgrey.svg) ![](https://jfcameron.github.io/jfc-smart_handles/)
+
 ## jfc-smart_handles
 
 scoped wrappers for handle types found in OpenGL, OpenAL, LibClang. Associates a handle with a deleter, to be called when the wrapper falls out of scope.
