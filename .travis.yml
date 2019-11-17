@@ -58,6 +58,8 @@ matrix:
           ORIGIN_URL="$(git remote get-url origin)"
           echo "blar: $ORIGIN_URL"
           git checkout gh-pages
+          git branch
+          echo "DONE!"
           #cd ~
           #git clone --branch="gh-pages $ORIGIN_URL"
           #git branch -vv
