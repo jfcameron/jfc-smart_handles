@@ -56,7 +56,7 @@ matrix:
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
           git branch
           cp ~/docs .
-          git push --setupstream origin gh-pages
+          git push --set-upstream origin gh-pages
 
 
 before_script: 
