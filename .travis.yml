@@ -55,7 +55,10 @@ matrix:
           git clean -fxd
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
           git branch
+          git pull
           cp ~/docs .
+          git add docs
+          git commit -m "docs update"
           git push --set-upstream origin gh-pages
 
 
