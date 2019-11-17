@@ -15,6 +15,8 @@ namespace jfc
     template<class handle_type_param>
     class unique_handle final
     {
+        static_assert(std::is_trivial<handle_type_param>::value, "handle type must be trivial");
+
         /// \brief shared must have full access to data in order to move a unique to a shared
         friend shared_handle<handle_type_param>;
 
@@ -37,18 +39,18 @@ namespace jfc
 
     public:
         /// \brief get a copy of the handle
-        handle_type get() const
+        [[nodiscard]] handle_type get() const noexcept
         {
             return m_Handle;
         }
 
         /// \brief equality semantics
-        bool operator==(const unique_handle<handle_type> &b) const
+        [[nodiscard]] bool operator==(const unique_handle<handle_type> &b) const noexcept
         {
             return m_Handle == b.m_Handle;
         }
         /// \brief equality semantics
-        bool operator!=(const unique_handle<handle_type> &b) const {return !(*this = b);}
+        [[nodiscard]] bool operator!=(const unique_handle<handle_type> &b) const noexcept {return !(*this = b);}
 
         /// \brief move semantics
         unique_handle(unique_handle<handle_type> &&b)
@@ -73,7 +75,7 @@ namespace jfc
         {}
 
         /// \brief dtor only calls deleter if it is the handle owner
-        ~unique_handle()
+        ~unique_handle() noexcept
         {
             if (m_IsOwner) m_Deleter(m_Handle);
         }
