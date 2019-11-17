@@ -52,8 +52,11 @@ matrix:
           cd ..
           git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
           git fetch --all
+          git clean -fxd
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
           git branch
+          cp ~/docs .
+          git push --setupstream origin gh-pages
 
 
 before_script: 
