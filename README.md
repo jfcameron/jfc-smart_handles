@@ -1,4 +1,4 @@
-https://travis-ci.org/jfcameron/jfc-smart_handles.svg?branch=master
+[![Build Status](https://travis-ci.org/jfcameron/jfc-smart_handles.svg?branch=master)](https://travis-ci.org/jfcameron/jfc-smart_handles)
 
 ## jfc-smart_handles
 
