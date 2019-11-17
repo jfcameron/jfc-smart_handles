@@ -70,7 +70,7 @@ matrix:
           cd ..
           after_success:
           - |
-            coveralls --exclude cmake --exclude workspace
+            coveralls --exclude cmake --exclude workspace --exclude src --gcov-options '\-lp'
 
 
 
