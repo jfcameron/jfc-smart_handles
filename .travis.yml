@@ -37,6 +37,7 @@ matrix:
           ctest --extra-verbose
 
     - os: windows
+      compiler: MSVC
       script: 
         - |
           cd workspace
@@ -67,6 +68,7 @@ matrix:
           git push
           
     - os: linux
+      if: branch = master
       compiler: gcc
       env: Code Coverage
       before_install: pip install --user cpp-coveralls

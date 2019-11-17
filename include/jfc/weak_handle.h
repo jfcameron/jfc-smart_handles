@@ -15,6 +15,8 @@ namespace jfc
     template<class handle_type_param>
     class weak_handle final
     {
+        static_assert(std::is_trivial<handle_type_param>::value, "handle type must be trivial");
+
     public:
         /// \brief alias for handle type
         using handle_type = handle_type_param;
@@ -31,7 +33,7 @@ namespace jfc
 
     public:
         /// \brief attempts to create a shared_handle instance, if the handle has not been deleted
-        std::optional<shared_handle<handle_type>> lock() const
+        [[nodiscard]] std::optional<shared_handle<handle_type>> lock() const noexcept
         {
             if (auto pDeleter = m_pDeleter.lock()) 
             {
@@ -44,7 +46,7 @@ namespace jfc
         }
     
         /// \brief checks whether or not the observed shared_handle has fallen out of scope
-        bool expired() const
+        [[nodiscard]] bool expired() const noexcept
         {
             return m_pDeleter.expired();
         }
@@ -79,7 +81,7 @@ namespace jfc
         /// \brief weak handle from shared handle copy semantics
         weak_handle &operator=(const shared_handle_type &handle) {return weak_handle(handle);}
 
-        ~weak_handle() = default;
+        ~weak_handle() noexcept = default;
     };
 }
 

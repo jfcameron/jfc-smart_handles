@@ -20,6 +20,8 @@ namespace jfc
     template<class handle_type_param>
     class shared_handle final
     {
+        static_assert(std::is_trivial<handle_type_param>::value, "handle type must be trivial");
+
         /// \brief weaks must have full access to data in order to construct
         friend weak_handle<handle_type_param>;
     public:
@@ -44,19 +46,19 @@ namespace jfc
 
     public:
         /// \brief gets a copy of the handle's value
-        handle_type get() const
+        [[nodiscard]] handle_type get() const noexcept
         {
             return m_Handle;
         }
 
         /// \brief returns number of coowners of this handle
-        long use_count() const
+        [[nodiscard]] long use_count() const noexcept
         {
             return m_pDeleter.use_count();
         }
         
         /// \brief equality operators
-        bool operator==(const shared_handle<handle_type> &b) const
+        [[nodiscard]] bool operator==(const shared_handle<handle_type> &b) const noexcept
         {
             return 
                 m_Handle   == b.m_Handle && 
@@ -64,7 +66,7 @@ namespace jfc
         }
         
         /// \brief equality operators
-        bool operator!=(const shared_handle<handle_type> &b) const
+        [[nodiscard]] bool operator!=(const shared_handle<handle_type> &b) const noexcept
         {
             return 
                 m_Handle   != b.m_Handle || 
@@ -116,7 +118,7 @@ namespace jfc
 
         /// \brief if this is the final owner, invoke the deleter (so long as it exists)
         /// <= used since non-zero values are approximate in a concurrent context
-        ~shared_handle()
+        ~shared_handle() noexcept
         {
             if (m_pDeleter.use_count() <= 1 && m_pDeleter) (*m_pDeleter)(m_Handle);
         }
