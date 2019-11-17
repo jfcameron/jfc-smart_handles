@@ -56,10 +56,10 @@ matrix:
           git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
           git branch
           git pull
-          cp ~/docs .
+          cp -R ~/docs .
           git add docs
           git commit -m "docs update"
-          git push --set-upstream origin gh-pages
+          git push --force --set-upstream origin gh-pages
 
 
 before_script: 
