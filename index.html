@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jfc-smart_handles
-   &#160;<span id="projectnumber">5398abb082264c8737ca0aa100b0c17398b66b48</span>
+   &#160;<span id="projectnumber">4b91e1110af6077db92a5a2c8aafa0acd706a876</span>
    </div>
   </td>
  </tr>
@@ -75,10 +75,11 @@ $(function() {
 <p>Shared handle models the many owners case, the deletor is invoked when the final owner falls out of scope. A shared handle can also be copied to a Weak Handle.</p>
 <h3>weak_handle</h3>
 <p>Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.</p>
+<h2>CI &amp; Documentation</h2>
 <p>Documentation can be generated with doxygen or viewed online here: <a href="https://jfcameron.github.io/jfc-smart_handles/">https://jfcameron.github.io/jfc-smart_handles/</a></p>
 <p>Unit tests written with catch2 are available under test/</p>
 <p>Coverage calculated with gcov. Viewable online here: <a href="https://coveralls.io/github/jfcameron/jfc-smart_handles">https://coveralls.io/github/jfcameron/jfc-smart_handles</a></p>
-<p>CI done using Travis CI. Build scripts cover Windows, Linux, Mac OSes, GCC, MSVC, Clang compilers. <a href="https://travis-ci.org/jfcameron/jfc-smart_handles">https://travis-ci.org/jfcameron/jfc-smart_handles</a> </p>
+<p>CI done using Travis CI. Build scripts cover Windows, Linux, Mac; GCC, MSVC, Clang. <a href="https://travis-ci.org/jfcameron/jfc-smart_handles">https://travis-ci.org/jfcameron/jfc-smart_handles</a> </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
