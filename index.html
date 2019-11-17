@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jfc-smart_handles
-   &#160;<span id="projectnumber">e5bc65a538ea3a8d03843276f0390c9a1f6fe54d</span>
+   &#160;<span id="projectnumber">6294904d2b04f2abc763b1cfc2bf8f0ffa5be25f</span>
    </div>
   </td>
  </tr>
@@ -73,7 +73,8 @@ $(function() {
 <p>Shared handle models the many owners case, the deletor is invoked when the final owner falls out of scope. A shared handle can also be copied to a Weak Handle.</p>
 <h3>weak_handle</h3>
 <p>Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.</p>
-<p>Documentation can be generated with doxygen. Unit tests written with catch2 are available under test/ </p>
+<p>Documentation can be generated with doxygen. Unit tests written with catch2 are available under test/</p>
+<p>CI info here: <a href="https://travis-ci.org/jfcameron/jfc-smart_handles">https://travis-ci.org/jfcameron/jfc-smart_handles</a> Online documentations here: <a href="https://jfcameron.github.io/jfc-smart_handles/">https://jfcameron.github.io/jfc-smart_handles/</a> </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
