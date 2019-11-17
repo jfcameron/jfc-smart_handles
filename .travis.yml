@@ -14,7 +14,7 @@ matrix:
       script:
         - |
           cd workspace
-          cmake .. -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Wno-padded -Ofast -flto -funroll-loops -m64 -march=native -std=c++17 -stdlib=libc++"
+          cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_TESTS=ON -DCMAKE_CXX_FLAGS="-pedantic -Weverything -Wno-c++98-compat -Wno-padded -Ofast -flto -funroll-loops -m64 -march=native -std=c++17 -stdlib=libc++"
           make
           ctest --extra-verbose
 
