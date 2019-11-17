@@ -67,9 +67,10 @@ matrix:
           cmake .. -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-g -O0 -Wall -fprofile-arcs -ftest-coverage"
           make
           make test
+          cd ..
           after_success:
           - |
-            cd ..
+            #cd ..
             coveralls --exclude tests
 
 
