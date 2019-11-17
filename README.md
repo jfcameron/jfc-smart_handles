@@ -6,7 +6,7 @@ scoped wrappers for handle types found in OpenGL, OpenAL, LibClang. Associates a
 
 The smart_handles define move semantics, copy semantics and end of life behavior, simplifying writing objects around e.g vertex buffer handles, audio buffer handles.
 
-The types, their interface and interations are modeled after the stl smart pointers. 
+The types, their interface and interactions are modeled after the stl smart pointers. 
 
 ### unique_handle
 Unique Handle models the single owner case with move support to another unique handle or a shared handle. 
