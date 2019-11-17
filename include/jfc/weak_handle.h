@@ -42,7 +42,8 @@ namespace jfc
 
             return {};
         }
-
+    
+        /// \brief checks whether or not the observed shared_handle has fallen out of scope
         bool expired() const
         {
             return m_pDeleter.expired();
