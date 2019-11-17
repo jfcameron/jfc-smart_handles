@@ -49,39 +49,11 @@ matrix:
           cd workspace
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
           mv docs ~
-          #cd ~
-          #CURRENT_REMOTE_URL="$(git remote get-url origin)"
-          #echo "Echo: ${CURRENT_REMOTE_URL}"
-          #echo "Echo2: $(git remote get-url origin)"
-          #echo $CURRENT_REMOTE_URL
-          echo "$(git remote get-url origin)"
-          ORIGIN_URL="$(git remote get-url origin)"
-          echo "blar: $ORIGIN_URL"
-
-          cd $HOME
-          #git config --global user.email "travis@travis-ci.org"
-          #git config --global user.name "travis-ci"
-          #BLAR="https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
-          URL=git config --get remote.origin.url | sed -e "s/^https:\/\///"
-          echo "url: $URL"
-          git clone --quiet --branch=gh-pages $BLAR gh-pages > /dev/null
-          #git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/ReadyTalk/swt-bling gh-pages > /dev/null
-          cd gh-pages
-          cp -Rf ~/docs ./docs
-          git add -f .
-          git commit -m "docs updated"
-          git push -fq origin gh-pages > /dev/null
-          #-=-=-=-==-==-==
-          #git checkout gh-pages
-          #git branch
-          #echo "DONE!"
-          #cd ~
-          #git clone --branch="gh-pages $ORIGIN_URL"
-          #git branch -vv
-          #git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
-          #git fetch --all 
-          #git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
-          ls
+          cd ..
+          git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
+          git fetch --all
+          git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
+          git branch
 
 
 before_script: 
