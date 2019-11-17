@@ -70,7 +70,6 @@ matrix:
           cd ..
           after_success:
           - |
-            #cd ..
             coveralls --exclude cmake workspace
 
 
