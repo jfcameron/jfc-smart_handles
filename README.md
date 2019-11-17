@@ -22,3 +22,5 @@ Documentation can be generated with doxygen or viewed online here: https://jfcam
 Unit tests written with catch2 are available under test/
 
 Coverage calculated with gcov. Viewable online here: https://coveralls.io/github/jfcameron/jfc-smart_handles
+
+CI done using Travis CI. Build scripts cover Windows, Linux, Mac OSes, GCC, MSVC, Clang compilers. https://travis-ci.org/jfcameron/jfc-smart_handles
