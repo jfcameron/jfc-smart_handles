@@ -50,12 +50,18 @@ matrix:
           cmake .. -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
           mv docs ~
           cd ~
-          CURRENT_REMOTE_URL="$(git remote get-url origin)"
-          echo "Echo: ${CURRENT_REMOTE_URL}"
-          echo "Echo2: $(git remote get-url origin)"
-          echo $CURRENT_REMOTE_URL
-          git clone --branch="gh-pages ${CURRENT_REMOTE_URL}"
-          git branch -vv
+          #CURRENT_REMOTE_URL="$(git remote get-url origin)"
+          #echo "Echo: ${CURRENT_REMOTE_URL}"
+          #echo "Echo2: $(git remote get-url origin)"
+          #echo $CURRENT_REMOTE_URL
+          #echo "$(git remote get-url origin)"
+          #git clone --branch="gh-pages ${CURRENT_REMOTE_URL}"
+          #git branch -vv
+          git remote set-url --push origin https://${GITHUB_PUBLIC_REPO_TOKEN}@$(git config --get remote.origin.url | sed -e "s/^https:\/\///")
+          git fetch --all 
+          git checkout -b gh-pages;git pull origin gh-pages;git clean -fxd;git reset --hard
+          ls
+
 
 before_script: 
   - |
