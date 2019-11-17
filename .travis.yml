@@ -57,9 +57,21 @@ matrix:
           echo "$(git remote get-url origin)"
           ORIGIN_URL="$(git remote get-url origin)"
           echo "blar: $ORIGIN_URL"
-          git checkout gh-pages
-          git branch
-          echo "DONE!"
+
+          cd $HOME
+          git config --global user.email "travis@travis-ci.org"
+          git config --global user.name "travis-ci"
+          git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/${GH_USER}/${GH_REPO}.git gh-pages > /dev/null
+          #git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/ReadyTalk/swt-bling gh-pages > /dev/null
+          cd gh-pages
+          cp -Rf ~/docs ./docs
+          git add -f .
+          git commit -m "docs updated"
+          git push -fq origin gh-pages > /dev/null
+          #-=-=-=-==-==-==
+          #git checkout gh-pages
+          #git branch
+          #echo "DONE!"
           #cd ~
           #git clone --branch="gh-pages $ORIGIN_URL"
           #git branch -vv
