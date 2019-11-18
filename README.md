@@ -21,10 +21,10 @@ tl;dr: the 3 handle types mimic std::shared_ptr, weak_ptr, unique_ptr.
 
 ## CI & Documentation
 
-Documentation can be generated with doxygen or viewed online here: https://jfcameron.github.io/jfc-smart_handles/
+Documentation generated with doxygen ca be viewed online here: https://jfcameron.github.io/jfc-smart_handles/
 
-Unit tests written with catch2 are available under test/
-
-Coverage calculated with gcov. Viewable online here: https://coveralls.io/github/jfcameron/jfc-smart_handles
+Coverage calculated with gcov viewable here: https://coveralls.io/github/jfcameron/jfc-smart_handles
 
 CI done using Travis CI. Build scripts cover Windows, Linux, Mac; Clang, GCC, MSVC, MinGW: https://travis-ci.org/jfcameron/jfc-smart_handles
+
+catch2 unit tests available under `test/`.
