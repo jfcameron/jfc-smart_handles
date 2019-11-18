@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jfc-smart_handles
-   &#160;<span id="projectnumber">6a3fc2d79f599c518dae8655984c9f441407c823</span>
+   &#160;<span id="projectnumber">d0261bbce051070f2dc1b9c7be1a26bb2e4bd14d</span>
    </div>
   </td>
  </tr>
@@ -74,7 +74,8 @@ $(function() {
 <h3>shared_handle</h3>
 <p>Shared handle models the many owners case, the deletor is invoked when the final owner falls out of scope. A shared handle can also be copied to a Weak Handle.</p>
 <h3>weak_handle</h3>
-<p>Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.</p>
+<p>Weak handle is similar to Shared, except it does not contribute to the use_count and the handle cannot be accessed directly. Instead, the lock method must be called, which returns an optional to a shared handle. If the shared handle that the weak handle is observing has not fallen out of scope at the time of the lock then the optional will contain a new shared handle to the resource. If not, then the optional will be null.</p>
+<p>tl;dr: the 3 handle types mimic std::shared_ptr, weak_ptr, unique_ptr.</p>
 <h2>CI &amp; Documentation</h2>
 <p>Documentation can be generated with doxygen or viewed online here: <a href="https://jfcameron.github.io/jfc-smart_handles/">https://jfcameron.github.io/jfc-smart_handles/</a></p>
 <p>Unit tests written with catch2 are available under test/</p>
