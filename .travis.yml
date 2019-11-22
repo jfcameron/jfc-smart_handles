@@ -30,6 +30,8 @@ jobs:
           make
           ctest --extra-verbose
 
+jobs:
+  include:
     - os: linux
       name: build wasm using emscripten
       compiler: gcc
