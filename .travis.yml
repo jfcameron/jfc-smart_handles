@@ -9,7 +9,9 @@ matrix:
   include:
     # Build scripts
     - os: linux
-      arch: amd64
+      arch: 
+        - amd64
+        - arm64
       name: build linux gcc
       compiler: gcc
       addons:
