@@ -8,6 +8,9 @@ language: cpp
 matrix:
   include:
     # Build scripts
+    arch:
+    - amd64
+    - arm64
     - os: linux
       name: build linux gcc
       compiler: gcc
