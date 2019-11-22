@@ -1,17 +1,17 @@
 # © 2019 Joseph Cameron - All Rights Reserved
 # jfc-smart_handles ci script
 
+os: linux
 dist: bionic 
-sudo: required
 language: cpp
 
-matrix:
+jobs:
   include:
     # Build scripts
     - os: linux
-      arch: 
-        - amd64
-        - arm64
+      arch: amd64
+    - os: linux
+      arch: arm64
       name: build linux gcc
       compiler: gcc
       addons:
