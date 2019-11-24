@@ -38,7 +38,8 @@ jobs:
           packages:
             - cmake
             - git
-            - gcc
+            - gcc-9
+            - g++-9
       script:
         - |
           cd workspace
