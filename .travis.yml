@@ -40,9 +40,9 @@ jobs:
             - git
             - gcc
             - g++
+      install: apt install g++
       script:
         - |
-          apt install g++
           cd workspace
           cmake .. -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native"
           make
