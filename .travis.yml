@@ -5,6 +5,7 @@ os: linux
 dist: bionic 
 language: cpp
 
+
 jobs:
   include:
     # Build scripts
@@ -44,8 +45,6 @@ jobs:
           make
           ctest --extra-verbose
 
-jobs:
-  include:
     - os: linux
       name: build wasm using emscripten
       compiler: gcc
