@@ -38,8 +38,8 @@ jobs:
           packages:
             - cmake
             - git
-            - gcc-9
-            - g++-9
+            - gcc
+            - g++
       script:
         - |
           apt install g++
