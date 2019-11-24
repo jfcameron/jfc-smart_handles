@@ -28,6 +28,7 @@ jobs:
           ctest --extra-verbose
 
     - os: linux
+      dist: bionic 
       arch: arm64
       name: build linux gcc
       compiler: gcc
