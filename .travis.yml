@@ -1,10 +1,8 @@
 # © 2019 Joseph Cameron - All Rights Reserved
 # jfc-smart_handles ci script
 
-os: linux
-dist: bionic 
+#dist: bionic 
 language: cpp
-
 
 jobs:
   include:
