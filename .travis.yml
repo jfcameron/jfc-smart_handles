@@ -5,17 +5,31 @@ os: linux
 dist: bionic 
 language: cpp
 
-arch:
-  - amd64
-  - arm64
 jobs:
   include:
     # Build scripts
     - os: linux
+      arch: amd64
       name: build linux gcc
-      compiler:
-        - gcc
-        - clang
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            - git
+      script:
+        - |
+          cd workspace
+          cmake .. -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native"
+          make
+          ctest --extra-verbose
+
+    - os: linux
+      arch: arm64
+      name: build linux gcc
+      compiler: gcc
       addons:
         apt:
           sources:
