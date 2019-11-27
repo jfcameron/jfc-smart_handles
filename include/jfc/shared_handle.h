@@ -68,9 +68,7 @@ namespace jfc
         /// \brief equality operators
         [[nodiscard]] bool operator!=(const shared_handle<handle_type> &b) const noexcept
         {
-            return 
-                m_Handle   != b.m_Handle || 
-                m_pDeleter != b.m_pDeleter;
+			return !(*this == b);
         }
 
         /// \brief copy semantics
