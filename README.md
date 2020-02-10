@@ -2,7 +2,7 @@
 
 ## jfc-smart_handles
 
-scoped wrappers for handle types found in OpenGL, OpenAL, LibClang. Associates a handle with a deleter, to be called when the wrapper falls out of scope.
+scoped wrappers for handle types found in libraries like OpenGL, OpenAL, LibClang, FreeType. Associates a handle with a deleter, to be called when the wrapper falls out of scope.
 
 The smart_handles define move semantics, copy semantics and end of life behavior, simplifying writing objects around e.g vertex buffer handles, audio buffer handles.
 
