@@ -50,18 +50,33 @@ namespace jfc
             return m_Handle == b.m_Handle;
         }
         /// \brief equality semantics
-        [[nodiscard]] bool operator!=(const unique_handle<handle_type> &b) const noexcept {return !(*this = b);}
+        [[nodiscard]] bool operator!=(const unique_handle<handle_type> &b) const noexcept {return !(*this == b);}
 
         /// \brief move semantics
         unique_handle(unique_handle<handle_type> &&b)
-        : m_Handle(std::move(b.m_Handle))
+        : m_IsOwner(b.m_IsOwner)
+        , m_Handle(std::move(b.m_Handle))
         , m_Deleter(std::move(b.m_Deleter))
-        , m_IsOwner(b.m_IsOwner)
         {
             b.m_IsOwner = false;
         }
+
         /// \brief move semantics
-        unique_handle &operator=(unique_handle<handle_type> &&b) const {return std::move(b);}
+        unique_handle &operator=(unique_handle<handle_type> &&b)
+        {
+            if (this != &b)
+            {
+                if (m_IsOwner) m_Deleter(m_Handle);
+
+                m_IsOwner = b.m_IsOwner;
+                m_Handle = std::move(b.m_Handle);
+                m_Deleter = std::move(b.m_Deleter);
+
+                b.m_IsOwner = false;
+            }
+
+            return *this;
+        }
 
         /// \brief explicitly disallowing copy semantics
         unique_handle(const unique_handle<handle_type> &) = delete;
