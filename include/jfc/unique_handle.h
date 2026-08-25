@@ -1,4 +1,4 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - All Rights Reserved
 
 #ifndef JFC_UNIQUE_HANDLE_H
 #define JFC_UNIQUE_HANDLE_H
@@ -39,31 +39,26 @@ namespace jfc
 
     public:
         /// \brief get a copy of the handle
-        [[nodiscard]] handle_type get() const noexcept
-        {
+        [[nodiscard]] handle_type get() const noexcept {
             return m_Handle;
         }
 
         /// \brief equality semantics
-        [[nodiscard]] bool operator==(const unique_handle<handle_type> &b) const noexcept
-        {
+        [[nodiscard]] bool operator==(const unique_handle<handle_type> &b) const noexcept {
             return m_Handle == b.m_Handle;
         }
         /// \brief equality semantics
-        [[nodiscard]] bool operator!=(const unique_handle<handle_type> &b) const noexcept {return !(*this == b);}
 
         /// \brief move semantics
         unique_handle(unique_handle<handle_type> &&b)
         : m_IsOwner(b.m_IsOwner)
         , m_Handle(std::move(b.m_Handle))
-        , m_Deleter(std::move(b.m_Deleter))
-        {
+        , m_Deleter(std::move(b.m_Deleter)) {
             b.m_IsOwner = false;
         }
 
         /// \brief move semantics
-        unique_handle &operator=(unique_handle<handle_type> &&b)
-        {
+        unique_handle &operator=(unique_handle<handle_type> &&b) {
             if (this != &b)
             {
                 if (m_IsOwner) m_Deleter(m_Handle);
@@ -90,8 +85,7 @@ namespace jfc
         {}
 
         /// \brief dtor only calls deleter if it is the handle owner
-        ~unique_handle() noexcept
-        {
+        ~unique_handle() noexcept {
             if (m_IsOwner) m_Deleter(m_Handle);
         }
     };

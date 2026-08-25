@@ -1,4 +1,4 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - All Rights Reserved
 
 #ifndef JFC_SHARED_HANDLE_H
 #define JFC_SHARED_HANDLE_H
@@ -63,12 +63,6 @@ namespace jfc
             return 
                 m_Handle   == b.m_Handle && 
                 m_pDeleter == b.m_pDeleter;
-        }
-        
-        /// \brief equality operators
-        [[nodiscard]] bool operator!=(const shared_handle<handle_type> &b) const noexcept
-        {
-			return !(*this == b);
         }
 
         /// \brief copy semantics
