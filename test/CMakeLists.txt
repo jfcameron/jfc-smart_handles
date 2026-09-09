@@ -9,10 +9,7 @@ jfc_add_tests(
         "${CMAKE_CURRENT_LIST_DIR}/unique_handle_test.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/weak_handle_test.cpp"
 
-    INCLUDE_DIRECTORIES
-        "${${PROJECT_NAME}_INCLUDE_DIRECTORIES}"
-
     LIBRARIES
-            "${${PROJECT_NAME}_LIBRARIES}"
+            jfc-smart_handles
 )
 

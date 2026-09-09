@@ -2,6 +2,10 @@
 
 cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
+project(jfc-smart_handles
+    VERSION 1.0
+    DESCRIPTION "RAII wrappers for so-called handle types found in OpenAL, OpenGL, LibClang, patterned after the smart pointers of stl 2011")
+
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/jfc-cmake/jfclib.cmake")
 
 option(JFC_BUILD_DEMO "Build the demo" ON)
@@ -31,20 +35,30 @@ else()
     endforeach()
 endif()
 
-jfc_project(library
-    NAME "jfc-smart_handles"
-    VERSION 1.0
-    DESCRIPTION "RAII wrappers for so-called handle types found in OpenAL, OpenGL, LibClang, patterned after the smart pointers of stl 2011"
-    C++_STANDARD 20
-    C_STANDARD 90
-    TYPE STATIC
+if (NOT TARGET jfc-smart_handles)
 
-    PUBLIC_INCLUDE_DIRECTORIES
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    add_library(jfc-smart_handles STATIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/shared_handle.cpp)
 
-    SOURCE_LIST
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/shared_handle.cpp
-)
+    add_library(jfc::smart_handles ALIAS jfc-smart_handles)
+
+    set_target_properties(jfc-smart_handles PROPERTIES EXPORT_NAME smart_handles)
+
+    set_target_properties(jfc-smart_handles PROPERTIES PREFIX "lib")
+
+    jfc_generate_cmake_header()
+
+    target_include_directories(jfc-smart_handles
+        PUBLIC
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+            "$<INSTALL_INTERFACE:include>"
+        PRIVATE
+            "${PROJECT_BINARY_DIR}/generated_include/"
+        )
+
+    target_compile_features(jfc-smart_handles PUBLIC cxx_std_20)
+
+endif()
 
 if (JFC_BUILD_TESTS)
     add_subdirectory(test)
