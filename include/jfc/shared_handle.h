@@ -128,7 +128,7 @@ namespace jfc {
         : m_Handle(aUnique.m_Handle)
         , m_pDeleter(make_control(aUnique.m_Handle, std::move(aUnique.m_Deleter)))
         {
-            unique.m_IsOwner = false;
+            aUnique.m_IsOwner = false;
         }
         /// \brief move unique_handle to shared_handle semantics
         shared_handle &operator=(unique_handle<handle_type> &&aUnique) {
