@@ -46,7 +46,7 @@ if (NOT TARGET jfc-smart_handles)
 
     set_target_properties(jfc-smart_handles PROPERTIES PREFIX "lib")
 
-    jfc_generate_cmake_header()
+    jfc_generate_build_info()
 
     target_include_directories(jfc-smart_handles
         PUBLIC
