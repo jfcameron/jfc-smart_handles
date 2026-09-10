@@ -1,0 +1,90 @@
+# © Joseph Cameron - All Rights Reserved
+
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: linux gcc,     runner: ubuntu-latest,  cc: gcc,   cxx: g++ }
+          - { name: linux clang,   runner: ubuntu-latest,  cc: clang, cxx: clang++ }
+          - { name: macos clang,   runner: macos-latest,   cc: clang, cxx: clang++ }
+          - { name: windows msvc,  runner: windows-latest }
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: configure
+        run: cmake -S . -B build -DJFC_BUILD_TESTS=ON -DJFC_BUILD_DOCS=OFF
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+
+      - name: build
+        run: cmake --build build --config Release
+
+      - name: test
+        run: ctest --test-dir build --build-config Release --output-on-failure
+
+  standards:
+    name: headers standalone (${{ matrix.std }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        std: [c++20, c++23, c++2c]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: every header compiles alone, warnings are errors
+        run: |
+          for header in unique_handle shared_handle weak_handle; do
+            printf '#include <jfc/%s.h>\nint main(){}\n' "$header" > "${header}_alone.cpp"
+            g++ -std=${{ matrix.std }} -Wall -Wextra -Wdeprecated -Werror \
+                -Iinclude -c "${header}_alone.cpp" -o /dev/null
+          done
+
+  documentation:
+    name: doxygen to gh-pages
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: install doxygen
+        run: sudo apt-get update && sudo apt-get install -y doxygen
+
+      - name: generate
+        run: cmake -S . -B build -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/docs
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

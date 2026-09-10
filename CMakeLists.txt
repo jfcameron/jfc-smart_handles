@@ -1,6 +1,6 @@
 # © Joseph Cameron - All Rights Reserved
 
-cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 project(jfc-smart_handles
     VERSION 1.0
@@ -37,26 +37,21 @@ endif()
 
 if (NOT TARGET jfc-smart_handles)
 
-    add_library(jfc-smart_handles STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/shared_handle.cpp)
+    add_library(jfc-smart_handles INTERFACE)
 
     add_library(jfc::smart_handles ALIAS jfc-smart_handles)
 
     set_target_properties(jfc-smart_handles PROPERTIES EXPORT_NAME smart_handles)
 
-    set_target_properties(jfc-smart_handles PROPERTIES PREFIX "lib")
-
     jfc_generate_build_info()
 
     target_include_directories(jfc-smart_handles
-        PUBLIC
+        INTERFACE
             "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
             "$<INSTALL_INTERFACE:include>"
-        PRIVATE
-            "${PROJECT_BINARY_DIR}/generated_include/"
         )
 
-    target_compile_features(jfc-smart_handles PUBLIC cxx_std_20)
+    target_compile_features(jfc-smart_handles INTERFACE cxx_std_20)
 
 endif()
 
