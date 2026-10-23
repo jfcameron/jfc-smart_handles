@@ -76,7 +76,7 @@ jobs:
           submodules: recursive
 
       - name: install doxygen
-        run: sudo apt-get update && sudo apt-get install -y doxygen
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
       - name: generate
         run: cmake -S . -B build -DJFC_BUILD_DOCS=ON -DJFC_BUILD_TESTS=OFF
