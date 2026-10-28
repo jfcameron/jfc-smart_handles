@@ -1,4 +1,4 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - MIT License
 
 #ifndef JFC_WEAK_HANDLE_H
 #define JFC_WEAK_HANDLE_H
@@ -6,7 +6,6 @@
 #include <jfc/shared_handle.h>
 
 #include <memory>
-#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -32,8 +31,7 @@ namespace jfc {
         /// \brief handle to the resource.
         handle_type m_Handle{};
 
-        /// \brief wp to the deleter
-        std::weak_ptr<typename shared_handle<handle_type>::deleter_type> m_pDeleter;
+        std::weak_ptr<typename shared_handle<handle_type>::control> m_pControl;
 
     public:
         /// \brief an empty handle
@@ -42,14 +40,14 @@ namespace jfc {
         /// \brief stop observing and become empty
         void reset() noexcept {
             m_Handle = handle_type{};
-            m_pDeleter.reset();
+            m_pControl.reset();
         }
 
-        /// \brief attempts to create a shared_handle instance 
-        [[nodiscard]] std::optional<shared_handle<handle_type>> lock() const noexcept {
-            if (auto pDeleter = m_pDeleter.lock()) {
+        /// \brief a share of the observed handle, or an empty shared_handle if it has been deleted
+        [[nodiscard]] shared_handle<handle_type> lock() const noexcept {
+            if (auto pControl = m_pControl.lock()) {
                 return shared_handle<handle_type>(
-                    typename shared_handle<handle_type>::from_weak_t{}, m_Handle, std::move(pDeleter));
+                    typename shared_handle<handle_type>::from_weak_t{}, m_Handle, std::move(pControl));
             }
 
             return {};
@@ -57,7 +55,7 @@ namespace jfc {
     
         /// \brief checks whether or not the observed shared_handle has fallen out of scope
         [[nodiscard]] bool expired() const noexcept {
-            return m_pDeleter.expired();
+            return m_pControl.expired();
         }
 
         /// \brief copy semantics
@@ -68,7 +66,7 @@ namespace jfc {
         /// \brief move semantics. 
         weak_handle(weak_handle<handle_type> &&b) noexcept
         : m_Handle(b.m_Handle)
-        , m_pDeleter(std::move(b.m_pDeleter))
+        , m_pControl(std::move(b.m_pControl))
         {
             b.m_Handle = handle_type{};
         }
@@ -76,7 +74,7 @@ namespace jfc {
         weak_handle &operator=(weak_handle<handle_type> &&b) noexcept {
             if (this != &b) {
                 m_Handle = b.m_Handle;
-                m_pDeleter = std::move(b.m_pDeleter);
+                m_pControl = std::move(b.m_pControl);
 
                 b.m_Handle = handle_type{};
             }
@@ -87,12 +85,12 @@ namespace jfc {
         /// \brief weak handle from shared handle copy semantics
         weak_handle(const shared_handle_type &handle)
         : m_Handle(handle.m_Handle)
-        , m_pDeleter(handle.m_pDeleter)
+        , m_pControl(handle.m_pControl)
         {}
         /// \brief weak handle from shared handle copy semantics
         weak_handle &operator=(const shared_handle_type &handle) {
             m_Handle = handle.m_Handle;
-            m_pDeleter = handle.m_pDeleter;
+            m_pControl = handle.m_pControl;
 
             return *this;
         }

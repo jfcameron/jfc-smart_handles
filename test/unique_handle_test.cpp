@@ -1,11 +1,11 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - MIT License
 
 #include <jfc/catch.hpp>
 #include <jfc/types.h>
 
 #include <jfc/unique_handle.h>
 
-#include <cstddef>
+#include <utility>
 
 namespace
 {
@@ -26,17 +26,19 @@ TEST_CASE( "jfc::unique_handle test", "[jfc::unique_handle]" )
     SECTION("move semantics work. Deletor only called by owner's destructor")
     {
         int deletor_call_count(0);
-        
-        {
-            const auto makeAUnique = [&deletor_call_count]()
-            {
-                return unique_handle<int>(INITIALIZED, [&deletor_call_count](const int)
-                {
-                    ++deletor_call_count;
-                });
-            };
 
-            auto b = makeAUnique();
+        {
+            unique_handle<int> a(INITIALIZED, [&deletor_call_count](const int){ ++deletor_call_count; });
+
+            {
+                const auto b = std::move(a);
+
+                REQUIRE(!a);
+                REQUIRE(b.get() == INITIALIZED);
+                REQUIRE(deletor_call_count == 0);
+            }
+
+            REQUIRE(deletor_call_count == 1);
         }
 
         REQUIRE(deletor_call_count == 1);

@@ -1,4 +1,4 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - MIT License
 
 #include <jfc/catch.hpp>
 #include <jfc/types.h>
@@ -6,12 +6,11 @@
 #include <jfc/shared_handle.h>
 #include <jfc/unique_handle.h>
 
-#include <cstddef>
+#include <utility>
 
 using namespace jfc;
 
 using GLint = int;
-using GLfloat = float;
 
 static constexpr GLint INITIALIZED(1);
 
@@ -78,11 +77,15 @@ TEST_CASE("jfc::shared_handle", "[jfc::shared_handle]")
     {
         int deleter_call_count(0);
 
-        shared_handle<int> share = unique_handle<int>(INITIALIZED, [&deleter_call_count](const int){deleter_call_count++;});
+        {
+            const shared_handle<int> share = unique_handle<int>(INITIALIZED, [&deleter_call_count](const int){deleter_call_count++;});
 
-        REQUIRE(share.get() == INITIALIZED);
+            REQUIRE(share.get() == INITIALIZED);
 
-        REQUIRE(deleter_call_count == 0);
+            REQUIRE(deleter_call_count == 0);
+        }
+
+        REQUIRE(deleter_call_count == 1);
     }
 }
 

@@ -1,4 +1,4 @@
-// © Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - MIT License
 
 #include <jfc/catch.hpp>
 
@@ -94,7 +94,7 @@ TEST_CASE("jfc::weak_handle assignment", "[jfc::weak_handle]")
         const auto locked = a.lock();
 
         REQUIRE(locked);
-        REQUIRE(locked->get() == 2);
+        REQUIRE(locked.get() == 2);
     }
 
     SECTION("move assignment observes what the other observed")
@@ -106,7 +106,7 @@ TEST_CASE("jfc::weak_handle assignment", "[jfc::weak_handle]")
         const auto locked = a.lock();
 
         REQUIRE(locked);
-        REQUIRE(locked->get() == 2);
+        REQUIRE(locked.get() == 2);
     }
 
     SECTION("assignment from a shared_handle observes it without owning it")
@@ -120,7 +120,7 @@ TEST_CASE("jfc::weak_handle assignment", "[jfc::weak_handle]")
         const auto locked = a.lock();
 
         REQUIRE(locked);
-        REQUIRE(locked->get() == 2);
+        REQUIRE(locked.get() == 2);
         REQUIRE(second.use_count() == 2);
     }
 }
@@ -199,7 +199,7 @@ TEST_CASE("a moved-from handle is empty, and says so", "[jfc::unique_handle][jfc
         REQUIRE(source.expired());
         REQUIRE(!source.lock());
         REQUIRE(!destination.expired());
-        REQUIRE(destination.lock()->get() == 42);
+        REQUIRE(destination.lock().get() == 42);
     }
 }
 
@@ -312,4 +312,31 @@ TEST_CASE("reset releases what is held", "[jfc::unique_handle][jfc::shared_handl
         REQUIRE(w.expired());
         REQUIRE(!w.lock());
     }
+}
+
+TEST_CASE("a handle moved onto itself is left as it was", "[jfc::unique_handle][jfc::shared_handle][jfc::weak_handle]")
+{
+    int calls(0);
+
+    {
+        unique_handle<int> unique(1, [&](const int){ ++calls; });
+        shared_handle<int> shared(2, [&](const int){ ++calls; });
+        weak_handle<int> weak(shared);
+
+        auto &sameUnique = unique;
+        auto &sameShared = shared;
+        auto &sameWeak = weak;
+
+        unique = std::move(sameUnique);
+        shared = std::move(sameShared);
+        weak = std::move(sameWeak);
+
+        REQUIRE(unique.get() == 1);
+        REQUIRE(shared.get() == 2);
+        REQUIRE(shared.use_count() == 1);
+        REQUIRE(weak.lock() == shared);
+        REQUIRE(calls == 0);
+    }
+
+    REQUIRE(calls == 2);
 }
